@@ -28,29 +28,22 @@
                         <a href="https://dlapiperfuture.com/"><img src="img/deko/plus.png" class="subsection-title__plus"></a>
                     </span>
                 </div>
-                <div class="subsection-content">
-                    <div class="subsection-content__left"> Pierwsza Grupa</div>
-                    <div class="subsection-content__right"><a class="accent" href="https://www.wp.pl/">Edytuj</a></div>
-                    <div class="subsection-content__right"><a class="accent" href="https://www.wp.pl/">Usuń</a></div>
-                </div>
-                <div class="subsection-content">
-                    <div class="subsection-content__left"> Druga grupa</div>
-                    <div class="subsection-content__right"><a class="accent" href="https://www.wp.pl/">Edytuj</a></div>
-                    <div class="subsection-content__right"><a class="accent" href="https://www.wp.pl/">Usuń</a></div>
-                </div>
-
-                <div class="subsection-content">
-                    <div class="subsection-content__left"> Trzecia grupa</div>
-                    <div class="subsection-content__right"><a class="accent" href="https://www.wp.pl/">Edytuj</a></div>
-                    <div class="subsection-content__right"><a class="accent" href="https://www.wp.pl/">Usuń</a></div>
-                </div>
-
-                <div class="subsection-content">
-                    <div class="subsection-content__left"> Czwarta Grupa</div>
-                    <div class="subsection-content__right"><a class="accent" href="https://www.wp.pl/">Edytuj</a></div>
-                    <div class="subsection-content__right"><a class="accent" href="https://www.wp.pl/">Usuń</a></div>
-                </div>
-
+                <?php
+                    //połączenie z bazą school
+                    $conn="mysql:host=localhost;port=3307;dbname=school2";
+                    $pdo= new PDO($conn,"root","");
+                                        
+                    //Zapytanie do bazy o grupy
+                    $loading = $pdo->prepare('SELECT name FROM groups');  
+                    $loading->execute();
+                                      
+                    //Wyświetlanie grup
+                    while ($row=$loading->fetch()){ 
+                        echo '<div class="subsection-content"><div class="subsection-content__left">'.$row['name'].'</div><div class="subsection-content__right"><a class="accent" href="grupa.php">Edytuj</a></div>
+                        <div class="subsection-content__right"><a class="accent" href="https://www.wp.pl/">Usuń</a></div></div>';
+                    }
+                     
+                ?>
 
 
                 <!---------Nauczyciele-->
